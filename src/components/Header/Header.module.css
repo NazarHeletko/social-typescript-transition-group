@@ -1,0 +1,46 @@
+.header {
+    height: 60px;
+    width: 100%;
+    background: #295185;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    font-family: 'Josefin Sans';
+}
+
+.loginBtn {
+    height: 26px;
+    width: 60px;
+    font-size: 1rem;
+    background: #e2ebf1;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    font-family: 'Josefin Sans';
+    cursor: pointer;
+}
+
+.btn-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 20px;
+}
+
+.logo {
+    height: 40px;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    color: #d9bfb5;
+    font-size: 1.3rem;
+}
+
+.logo span {
+    margin-left: 6px;
+}
+
+.logo img {
+    height: inherit;
+}
+
+
