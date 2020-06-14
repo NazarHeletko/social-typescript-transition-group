@@ -5,12 +5,25 @@ import reactLogo from '../../assets/img/react-icon.png';
 import { CSSTransition } from 'react-transition-group';
 import './Header.css';
 
+type authDataType = {
+    id: number
+    login: string
+    email: string
+}
 
-let Header = (props:any) => {
+type PropsType = {
+    isAuth: boolean
+    authData: authDataType
+    isAuthThunk: () => void
+}
+
+let Header: React.FC<PropsType> = ({isAuth, authData, isAuthThunk}) => {
     useEffect(()=>{
-        props.isAuthThunk();
-    }, [props.isAuth]);
+        isAuthThunk();
+    }, [isAuth]);
 
+    // @ts-ignore
+    // @ts-ignore
     return(
         <CSSTransition
         in={true}
@@ -20,10 +33,10 @@ let Header = (props:any) => {
             <div className={style.header}>
                 <div className={style.logo}>
                     <img src={reactLogo}/>
-                    {!props.isAuth ? <span>Social</span> : <span>Hello, {props.authData.login}</span>}
+                    {!isAuth ? <span>Social</span> : <span>Hello, {authData.login}</span>}
                 </div>
                 <div className={style['btn-wrapper']}>
-                    {!props.isAuth ?
+                    {!isAuth ?
                         <Ripples during={1200}>
                             <button className={style.loginBtn}>Login</button>
                         </Ripples> :

@@ -1,18 +1,22 @@
-import {auth} from '../api/api';
+import {auth, resultCodesEnum} from '../api/api';
+import {authDataType} from "../components/Header/HeaderContainer";
+import {appStateType} from "./redux-store";
+import {Dispatch} from "redux";
 
 const IS_AUTHORIZED = 'IS_AUTHORIZED';
 
-export type initialStateType = {
-    isAuthorized: boolean,
-    authData: null | object
-}
-
-let initialState: initialStateType = {
+let initialState = {
     isAuthorized: false,
-    authData: null
+    authData: {
+        id: 0,
+        login: '',
+        email: ''
+    }
 };
 
-const authReducer = (state = initialState, action: any): initialStateType => {
+export type initialStateType = typeof initialState;
+
+const authReducer = (state = initialState, action: actionsTypes): initialStateType => {
     switch (action.type) {
         case IS_AUTHORIZED:
             return{
@@ -25,13 +29,15 @@ const authReducer = (state = initialState, action: any): initialStateType => {
     }
 };
 
+type actionsTypes = isAuthAcType
+
 type isAuthAcType = {
     type: typeof IS_AUTHORIZED,
     isAuthorized: boolean,
-    authData: object
+    authData: authDataType
 }
 
-const isAuthAC = (isAuthorized: boolean, authData: object): isAuthAcType => {
+export const isAuthAC = (isAuthorized: boolean, authData: authDataType): isAuthAcType => {
     return {
         type: IS_AUTHORIZED,
         isAuthorized,
@@ -39,13 +45,12 @@ const isAuthAC = (isAuthorized: boolean, authData: object): isAuthAcType => {
     }
 };
 
-export const isAuthThunk = () => (dispatch:any) => {
+export const isAuthThunk = () => (dispatch: Dispatch<actionsTypes>, getState: () => appStateType) => {
     auth.isAuthApi().then((response:any) => {
-        if(response.data.resultCode === 0){
-            dispatch(isAuthAC(true, response.data.data))
+        if(response.resultCode === resultCodesEnum.Success){
+            dispatch(isAuthAC(true, response.data))
         }
     })
 };
-
 
 export default authReducer;

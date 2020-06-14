@@ -3,14 +3,16 @@ import authReducer from "./auth-reducer";
 import thunkMiddleware from 'redux-thunk';
 
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
     auth: authReducer
 });
 
+type rootReducerType = typeof rootReducer;
+export type appStateType = ReturnType<rootReducerType>;
 
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
 
 
