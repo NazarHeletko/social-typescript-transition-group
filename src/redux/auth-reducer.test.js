@@ -13,7 +13,7 @@ it('authorization completed successfully', () => {
 
     let action = isAuthAC(true, {id: 1, login: 'Test', email: 'test@tdd.com'});
 
-    let newState = authReducer(state, action); 
+    let newState = authReducer(state, action);
 
     expect(newState.isAuthorized).toBe(true);
 });

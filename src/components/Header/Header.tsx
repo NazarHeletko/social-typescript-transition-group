@@ -30,17 +30,17 @@ let Header: React.FC<PropsType> = ({isAuth, authData, isAuthThunk}) => {
         timeout={{appear: 1000}}
         classNames={'header-animate-'}
         appear={true}>
-            <div className={style.header}>
-                <div className={style.logo}>
-                    <img src={reactLogo}/>
-                    {!isAuth ? <span>Social</span> : <span>Hello, {authData.login}</span>}
+            <div className={style.header} data-test='headerTest'>
+                <div className={style.logo} data-test='logoTest'>
+                    <img data-test='reactLogoTest' src={reactLogo}/>
+                    {!isAuth ? <span data-test='socialTest'>Social</span> : <span data-test='helloTest'>Hello, {authData.login}</span>}
                 </div>
                 <div className={style['btn-wrapper']}>
                     {!isAuth ?
-                        <Ripples during={1200}>
+                        <Ripples data-test='loginBtnTest' during={1200}>
                             <button className={style.loginBtn}>Login</button>
                         </Ripples> :
-                        <Ripples during={1200}>
+                        <Ripples data-test='logoutBtnTest' during={1200}>
                             <button className={style.loginBtn}>Logout</button>
                         </Ripples>}
                 </div>
