@@ -61,7 +61,7 @@ describe('Header component', () => {
             expect(login.length).toBe(1);
         });
 
-        it(`logout button should render when user authorized`, () => {
+        it(`logout button should not render when user authorized`, () => {
             const logout = findByTestAtrr(component, 'logoutBtnTest');
             expect(logout.length).toBe(0);
         });

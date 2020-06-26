@@ -13,18 +13,29 @@ export enum resultCodesEnum  {
     Error = 1
 }
 
+type isAuthResponseDataType = {
+    id: number
+    email: string
+    login: string
+}
+
 type isAuthResponseType = {
-    data: {
-        id: number
-        email: string
-        login: string
-    }
+    data: isAuthResponseDataType
     resultCode: number
     messages: Array<string>
+}
+
+type logoutResponseType = {
+    resultCode: number
+    messages: Array<string>
+    data: object
 }
 
 export const auth = {
     isAuthApi(){
         return instance.get<isAuthResponseType>('auth/me').then(response => response.data)
+    },
+    logoutApi(){
+        return instance.delete<logoutResponseType>('auth/login').then(response => response.data)
     }
 };

@@ -1,0 +1,10 @@
+.loginBtn {
+    padding: 6px;
+    font-size: 1rem;
+    background: #e2ebf1;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    font-family: 'Josefin Sans';
+    cursor: pointer;
+}

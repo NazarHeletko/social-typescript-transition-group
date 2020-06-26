@@ -4,6 +4,7 @@ import {appStateType} from "./redux-store";
 import {Dispatch} from "redux";
 
 const IS_AUTHORIZED = 'IS_AUTHORIZED';
+const LOGOUT = 'LOGOUT';
 
 let initialState = {
     isAuthorized: false,
@@ -24,12 +25,22 @@ const authReducer = (state = initialState, action: actionsTypes): initialStateTy
                 isAuthorized: action.isAuthorized,
                 authData: action.authData
             };
+        case LOGOUT:
+            return{
+                ...state,
+                isAuthorized: false,
+                authData: {
+                    id: 0,
+                    login: '',
+                    email: ''
+                }
+            };
         default:
             return state
     }
 };
 
-type actionsTypes = isAuthAcType
+type actionsTypes = isAuthAcType | logoutAcType
 
 type isAuthAcType = {
     type: typeof IS_AUTHORIZED,
@@ -45,10 +56,28 @@ export const isAuthAC = (isAuthorized: boolean, authData: authDataType): isAuthA
     }
 };
 
-export const isAuthThunk = () => (dispatch: Dispatch<actionsTypes>, getState: () => appStateType) => {
-    auth.isAuthApi().then((response:any) => {
+type logoutAcType = {
+    type: typeof LOGOUT
+}
+
+export const logoutAC = (): logoutAcType => {
+    return {
+        type: LOGOUT
+    }
+};
+
+export const isAuthThunk = () => (dispatch: Dispatch<actionsTypes>) => {
+    auth.isAuthApi().then((response) => {
         if(response.resultCode === resultCodesEnum.Success){
             dispatch(isAuthAC(true, response.data))
+        }
+    })
+};
+
+export const logoutThunk = () => (dispatch: Dispatch<actionsTypes>) => {
+    auth.logoutApi().then(response => {
+        if(response.resultCode === resultCodesEnum.Success){
+            dispatch(logoutAC())
         }
     })
 };

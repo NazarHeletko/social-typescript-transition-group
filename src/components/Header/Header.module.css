@@ -8,17 +8,7 @@
     font-family: 'Josefin Sans';
 }
 
-.loginBtn {
-    height: 26px;
-    width: 60px;
-    font-size: 1rem;
-    background: #e2ebf1;
-    border: none;
-    outline: none;
-    border-radius: 2px;
-    font-family: 'Josefin Sans';
-    cursor: pointer;
-}
+
 
 .btn-wrapper {
     display: flex;

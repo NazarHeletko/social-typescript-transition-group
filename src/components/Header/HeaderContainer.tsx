@@ -1,6 +1,6 @@
 import Header from "./Header";
 import {connect} from 'react-redux';
-import {isAuthThunk} from "../../redux/auth-reducer";
+import {isAuthThunk, logoutThunk} from "../../redux/auth-reducer";
 import {authSelectors} from "../../redux/selectors";
 import {appStateType} from "../../redux/redux-store";
 
@@ -17,6 +17,7 @@ type mapStatePropsType = {
 
 type mapDispatchPropsType = {
     isAuthThunk: () => void
+    logoutThunk: () => void
 }
 
 let mapStateToProps = (state: appStateType): mapStatePropsType => {
@@ -26,4 +27,7 @@ let mapStateToProps = (state: appStateType): mapStatePropsType => {
     }
 };
 
-export default connect<mapStatePropsType, mapDispatchPropsType, {}, appStateType>(mapStateToProps, {isAuthThunk})(Header);
+export default connect<mapStatePropsType, mapDispatchPropsType, {}, appStateType>(mapStateToProps, {
+    isAuthThunk,
+    logoutThunk
+})(Header);
